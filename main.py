@@ -238,3 +238,11 @@ async def cases_highrisk():
     for row in results:
         print(row)
     return results
+
+
+@app.get("/cases/total")
+async def get_total_cases():
+    cur = connection_cursor()
+    cur.execute(f"SELECT COUNT(DISTINCT case_id) FROM [dbo].[cases]")
+    count = cur.fetchone()
+    return count
